@@ -1,6 +1,7 @@
 package br.com.kaspper.ecommerce;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -12,35 +13,23 @@ import java.util.regex.Pattern;
 
 public class LogService {
 
+    private void parse(ConsumerRecord<String, String> record) {
+        System.out.println(" Processando e-mail , verificando por fralde ");
+        System.out.println(" LOG: " + record.topic());
+        System.out.println("Key: " + record.key());
+        System.out.println("Value: " + record.value());
+        System.out.println("Particao: " + record.partition());
+        System.out.println("Offset: " + record.offset());
+    }
+
     public static void main(String[] args) throws InterruptedException {
-        var consumer = new KafkaConsumer<String, String>(properties());
-        consumer.subscribe(Pattern.compile("ECOMMERCE.*") );
-        while (true) {
-            var records = consumer.poll(Duration.ofMillis(100));
 
-            if (!records.isEmpty()) {
-                System.out.println("-----------------------------------------");
-                for (var record : records) {
-                    System.out.println(" Processando e-mail , verificando por fralde ");
-                    System.out.println(" LOG: " + record.topic());
-                    System.out.println("Key: " + record.key());
-                    System.out.println("Value: " + record.value());
-                    System.out.println("Particao: " + record.partition());
-                    System.out.println("Offset: " + record.offset());
-                    Thread.sleep(1000);
-                }
-            }
-        }
+        var logService = new LogService();
+        var service = new KafkaService(LogService.class.getSimpleName(), "ECOMMERCE_SEND_EMAIL", logService::parse);
+        service.run();
+
 
     }
 
-    private static Properties properties() {
-        var properties = new Properties();
-        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
-        properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
-        properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
-        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, LogService.class.getSimpleName());
-        return properties;
-    }
 
 }
