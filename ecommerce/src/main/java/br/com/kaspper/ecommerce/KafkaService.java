@@ -8,6 +8,7 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 public class KafkaService {
 
@@ -16,9 +17,19 @@ public class KafkaService {
     private final ConsumerFunction parse;
 
     public KafkaService(String groupId, String topic, ConsumerFunction parse) {
+        this(parse, groupId);
+        consumer.subscribe(Collections.singletonList(topic));
+    }
+
+    private KafkaService(ConsumerFunction parse, String groupId ) {
         this.parse = parse;
         this.consumer = new KafkaConsumer<String, String>(properties(  groupId));
-        consumer.subscribe(Collections.singletonList(topic));
+    }
+
+    public KafkaService(String groupId, Pattern topic, ConsumerFunction parse) {
+        this.parse = parse;
+        this.consumer = new KafkaConsumer<String, String>(properties(  groupId));
+        consumer.subscribe(topic);
     }
 
     public void run() {

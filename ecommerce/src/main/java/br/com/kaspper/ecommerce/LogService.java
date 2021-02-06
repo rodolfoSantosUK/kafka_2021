@@ -25,7 +25,7 @@ public class LogService {
     public static void main(String[] args) throws InterruptedException {
 
         var logService = new LogService();
-        var service = new KafkaService(LogService.class.getSimpleName(), "ECOMMERCE_SEND_EMAIL", logService::parse);
+        var service = new KafkaService(LogService.class.getSimpleName(), Pattern.compile("ECOMMERCE.*"), logService::parse);
         service.run();
 
 
