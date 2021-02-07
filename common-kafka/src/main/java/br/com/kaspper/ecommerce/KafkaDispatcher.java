@@ -1,4 +1,5 @@
 package br.com.kaspper.ecommerce;
+
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -9,7 +10,7 @@ import java.io.Closeable;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
-public class KafkaDispatcher<T> implements Closeable {
+class KafkaDispatcher<T> implements Closeable {
 
     private final KafkaProducer<String, T> producer;
 
