@@ -3,6 +3,7 @@ package br.com.kaspper.ecommerce;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class EmailService {
 
@@ -14,6 +15,10 @@ public class EmailService {
                 String.class,
                 Map.of())) {
             service.run();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
     }
 

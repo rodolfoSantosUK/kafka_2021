@@ -7,6 +7,8 @@
         <option value="$PROJECT_DIR$/service-email/pom.xml" />
         <option value="$PROJECT_DIR$/service-fraude-detector/pom.xml" />
         <option value="$PROJECT_DIR$/common-kafka/pom.xml" />
+        <option value="$PROJECT_DIR$/service-new-order/pom.xml" />
+        <option value="$PROJECT_DIR$/service-log/pom.xml" />
       </list>
     </option>
   </component>
