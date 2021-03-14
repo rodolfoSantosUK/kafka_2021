@@ -7,7 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="service-log" />
-        <module name="common-kafka" />
+        <module name="service-user" />
         <module name="service-new-order" />
         <module name="service-email" />
         <module name="service-fraude-detector" />
@@ -20,6 +20,9 @@
       <module name="service-fraude-detector" target="11" />
       <module name="service-log" target="11" />
       <module name="service-new-order" target="11" />
+      <module name="service-user" target="11" />
+      <module name="service-users" target="11" />
+      <module name="service_user" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
