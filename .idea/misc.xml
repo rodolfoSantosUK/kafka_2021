@@ -3,7 +3,6 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/ecommerce/pom.xml" />
         <option value="$PROJECT_DIR$/service-email/pom.xml" />
         <option value="$PROJECT_DIR$/service-fraude-detector/pom.xml" />
         <option value="$PROJECT_DIR$/common-kafka/pom.xml" />
